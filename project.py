@@ -63,7 +63,7 @@ def displayChampions(name, tag):
         img = img.resize((50,50))
         photo = ImageTk.PhotoImage(img)
         images.append(photo) 
-        label = Label(window, text=topMasteries[i], image=photo, compound="left", padx=10)
+        label = Label(window, text=topMasteries[i], image=photo, compound="left", padx=10, width=190, height=55, anchor="w")
         label.pack(pady=0)
         labels.append(label)
 
