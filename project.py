@@ -1,6 +1,5 @@
 import json
 import requests
-import tkinter as tk8
 from tkinter import *
 from PIL import Image, ImageTk
 
@@ -19,13 +18,10 @@ def getPuuid(gameName, tagLine):
     headers = {
         "X-Riot-Token": API_KEY
     }
-
-
     response = requests.get(nbApiQuestion, headers = headers)
     data = response.json()
     puuid = data["puuid"]
     return puuid 
-
 
 def getMastery(PUUID):
     nbApiURL = f"/lol/champion-mastery/v4/champion-masteries/by-puuid/{PUUID}"  
@@ -33,7 +29,6 @@ def getMastery(PUUID):
     headers = {
         "X-Riot-Token": API_KEY
     }
-
     response = requests.get(nbApiQuestion, headers = headers)
     data = response.json()
     print(response)
@@ -69,21 +64,18 @@ def displayChampions(name, tag):
         photo = ImageTk.PhotoImage(img)
         images.append(photo) 
         label = Label(window, text=topMasteries[i], image=photo, compound="left", padx=10)
-     
-
         label.pack(pady=0)
-        
-
         labels.append(label)
 
-    
-    
 def onEnter(entry1, entry2):
     name = entry1.get()
     tag = entry2.get()
+
+    name = name.replace(" ","").lower()
+    tag = tag.replace(" ","").lower()
+
     if name:
         displayChampions(name, tag)
-
 
 def GUI():
     window.title("Champion Mastery")
@@ -103,15 +95,10 @@ def GUI():
     entry1.bind("<Return>", lambda event: onEnter(entry1,entry2))
     entry2.bind("<Return>", lambda event: onEnter(entry1,entry2))
 
-
-
     window.mainloop()
-
-
 
 def main():
     GUI()
    
-
 if __name__ == "__main__":
     main()
